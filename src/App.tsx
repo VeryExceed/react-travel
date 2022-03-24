@@ -1,24 +1,24 @@
 import React from 'react'
 import styles from './App.module.css'
-import { Header, Footer, Carousel, SideMenu } from './components'
-import { Row, Col } from 'antd'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { HomePage, SignInPage, RegisterPage, DetailPage } from './pages'
 
 function App() {
   return (
     <div className={styles.App}>
-      <Header />
-      {/* 页面内容 content */}
-      <div className={styles['page-content']}>
-        <Row style={{ marginTop: 20 }}>
-          <Col span={6}>
-            <SideMenu />
-          </Col>
-          <Col span={18}>
-            <Carousel />
-          </Col>
-        </Row>
-      </div>
-      <Footer />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/signIn" component={SignInPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/detail/:touristRouteId" component={DetailPage} />
+          <Route
+            render={() => (
+              <h1 style={{ textAlign: 'center' }}>404 not found</h1>
+            )}
+          />
+        </Switch>
+      </BrowserRouter>
     </div>
   )
 }
