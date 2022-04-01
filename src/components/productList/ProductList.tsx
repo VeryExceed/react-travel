@@ -1,27 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { List, Rate, Space, Image, Tag, Typography } from "antd";
-import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { List, Rate, Space, Image, Tag, Typography } from 'antd'
+import { LikeOutlined, StarOutlined } from '@ant-design/icons'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 interface Product {
-  departureCity: string;
-  description: string;
-  discountPresent: number;
-  id: string;
-  originalPrice: number;
-  price: number;
-  rating: number;
-  title: string;
-  touristRoutePictures: any[];
-  travelDays: string;
-  tripType: string;
+  departureCity: string
+  description: string
+  discountPresent: number
+  id: string
+  originalPrice: number
+  price: number
+  rating: number
+  title: string
+  touristRoutePictures: any[]
+  travelDays: string
+  tripType: string
 }
 interface PropsType {
-  data: Product[];
-  paging: any;
-  onPageChange?: (nextPage, pageSize) => void;
+  data: Product[]
+  paging: any
+  onPageChange?: (nextPage, pageSize) => void
 }
 
 const listData = (productList: Product[]) =>
@@ -41,22 +41,22 @@ const listData = (productList: Product[]) =>
     price: p.price,
     originalPrice: p.originalPrice,
     discountPresent: p.discountPresent,
-    rating: p.rating,
-  }));
+    rating: p.rating
+  }))
 
 const IconText = ({ icon, text }) => (
   <Space>
     {React.createElement(icon)}
     {text}
   </Space>
-);
+)
 
 export const ProductList: React.FC<PropsType> = ({
   data,
   paging,
-  onPageChange,
+  onPageChange
 }) => {
-  const products = listData(data);
+  const products = listData(data)
   return (
     <List
       itemLayout="vertical"
@@ -65,7 +65,7 @@ export const ProductList: React.FC<PropsType> = ({
         current: paging.currentPage,
         onChange: (page) => onPageChange && onPageChange(page, paging.pageSize),
         pageSize: paging.pageSize,
-        total: paging.totalCount,
+        total: paging.totalCount
       }}
       dataSource={products}
       footer={
@@ -92,7 +92,7 @@ export const ProductList: React.FC<PropsType> = ({
               <Text strong className="ant-rate-text">
                 {item.rating}
               </Text>
-            </>,
+            </>
           ]}
           extra={
             <Image width={272} height={172} alt="image" src={item.imgSrc} />
@@ -110,7 +110,7 @@ export const ProductList: React.FC<PropsType> = ({
                       type="danger"
                       style={{ fontSize: 20, fontWeight: 400 }}
                     >
-                      {" "}
+                      {' '}
                       ¥ {item.price}
                     </Text>
                   </>
@@ -119,7 +119,7 @@ export const ProductList: React.FC<PropsType> = ({
                     ¥ {item.price}
                   </Text>
                 )}
-                <Link to={"/detail/" + item.id}> {item.title}</Link>
+                <Link to={'/detail/' + item.id}> {item.title}</Link>
               </>
             }
             description={item.tags}
@@ -128,5 +128,5 @@ export const ProductList: React.FC<PropsType> = ({
         </List.Item>
       )}
     />
-  );
-};
+  )
+}
