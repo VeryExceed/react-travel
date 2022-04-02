@@ -48,7 +48,6 @@ export const Header: React.FC = () => {
   const onLogout = () => {
     dispatch(userSlice.actions.logOut())
     history.push('/')
-    window.location.reload()
   }
 
   return (
@@ -79,7 +78,9 @@ export const Header: React.FC = () => {
                 {t('header.welcome')}
                 <Typography.Text strong>{username}</Typography.Text>
               </span>
-              <Button>{t('header.shoppingCart')}</Button>
+              <Button onClick={() => history.push('/shoppingCart')}>
+                {t('header.shoppingCart')}
+              </Button>
               <Button onClick={onLogout}>{t('header.signOut')}</Button>
             </Button.Group>
           ) : (
