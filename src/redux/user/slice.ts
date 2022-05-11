@@ -10,7 +10,7 @@ interface UserState {
 const initialState: UserState = {
   loading: false,
   error: null,
-  token: null
+  token: null,
 }
 
 export const signIn = createAsyncThunk(
@@ -20,15 +20,15 @@ export const signIn = createAsyncThunk(
       email: string
       password: string
     },
-    thunkAPI
+    thunkAPI,
   ) => {
     message.success('登录成功')
     const { data } = await axios.post(`http://123.56.149.216:8080/auth/login`, {
       email: paramaters.email,
-      password: paramaters.password
+      password: paramaters.password,
     })
     return data.token
-  }
+  },
 )
 
 export const userSlice = createSlice({
@@ -39,7 +39,7 @@ export const userSlice = createSlice({
       state.token = null
       state.error = null
       state.loading = false
-    }
+    },
   },
   extraReducers: {
     [signIn.pending.type]: (state) => {
@@ -53,6 +53,6 @@ export const userSlice = createSlice({
     [signIn.rejected.type]: (state, action: PayloadAction<string | null>) => {
       state.loading = false
       // state.error = action.payload
-    }
-  }
+    },
+  },
 })
